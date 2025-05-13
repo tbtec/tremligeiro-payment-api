@@ -32,5 +32,7 @@ func (ctl *PaymentCreateRestController) Handle(ctx context.Context, request http
 		return httpserver.HandleError(ctx, err)
 	}
 
-	return httpserver.Ok("")
+	return httpserver.Ok(dto.Payment{
+		Status: dto.PaymentStatusAuthorized,
+	})
 }
