@@ -1,16 +1,16 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: tremligeiro
+  name: tremligeiro-payment
   namespace: tremligeiro
   labels:
-    app: tremligeiro
+    app: tremligeiro-payment
     environment: "dev"
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: tremligeiro
+    name: tremligeiro-payment
   minReplicas: 1
   maxReplicas: 6
   metrics:

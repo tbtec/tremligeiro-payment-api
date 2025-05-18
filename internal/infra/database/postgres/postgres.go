@@ -23,7 +23,7 @@ const (
 	migrationsDockerDir  = "/app/migrations/"
 	migrationsLocalPath  = "file://./scripts/migrations"
 	migrationsDockerPath = "file:///app/migrations/"
-	schemaName           = "payment"
+	schemaName           = "tremligeiro_payment"
 )
 
 type PostgreSQLConf struct {

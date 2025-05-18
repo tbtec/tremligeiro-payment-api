@@ -1,4 +1,4 @@
-create table if not exists payment.payment
+create table if not exists tremligeiro_payment.payment
 (
     payment_id uuid not null primary key,
     order_id uuid not null,

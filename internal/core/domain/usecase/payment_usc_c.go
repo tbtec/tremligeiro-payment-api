@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 
+	"github.com/tbtec/tremligeiro/internal/core/domain/entity"
 	"github.com/tbtec/tremligeiro/internal/core/gateway"
 	"github.com/tbtec/tremligeiro/internal/dto"
 )
@@ -25,30 +26,12 @@ func NewUseCasePaymentCreate(paymentGateway *gateway.PaymentGateway) *UscPayment
 
 func (usc *UscPaymentWebHook) Create(ctx context.Context, paymentWebHook dto.PaymentCheckout) error {
 
-	// payment, err := usc.paymentGateway.FindOne(ctx, paymentWebHook.PaymentId)
-	// if err != nil {
-	// 	return ErrPaymentNotFound
-	// }
-	// if payment.IsFinished() {
-	// 	return ErrPaymentFinished
-	// }
+	payment := entity.NewPayment(paymentWebHook.OrderId)
 
-	// order, err := usc.orderGateway.FindOne(ctx, payment.OrderId)
-	// if err != nil {
-	// 	return ErrPaymentOrderNotFound
-	// }
-
-	// if paymentWebHook.Status == "approved" {
-	// 	order.SetStatus(entity.OrderStatusReceived)
-	// 	payment.SetStatus(entity.PaymentStatusAuthorized)
-	// 	usc.orderGateway.Update(ctx, order)
-	// 	usc.paymentGateway.Update(ctx, payment)
-	// }
-
-	// if paymentWebHook.Status == "repproved" {
-	// 	payment.SetStatus(entity.PaymentStatusNotAuthorized)
-	// 	usc.paymentGateway.Update(ctx, payment)
-	// }
+	err := usc.paymentGateway.Create(ctx, &payment)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
