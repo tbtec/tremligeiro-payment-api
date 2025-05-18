@@ -1,0 +1,23 @@
+services:
+    postgres:
+        container_name: 'postgres_tremligeiro_payment'
+        image: postgres:17.0
+        ports:
+            - 5432:$POSTGRES_PORT
+        environment:
+            - POSTGRES_DB=$POSTGRES_DB
+            - POSTGRES_USER=$POSTGRES_USER
+            - POSTGRES_PASSWORD=$POSTGRES_PASS
+        volumes:
+            - pg_data:/var/lib/postgresql/data
+        # restart: always
+    wiremock:
+        container_name: 'wiremock_tremligeiro_payment'
+        image: wiremock/wiremock:3.9.2-1
+        ports:
+            - 8081:8080
+        volumes:
+            - ./docs/mocks:/home/wiremock
+        # restart: always   
+volumes:
+    pg_data:
